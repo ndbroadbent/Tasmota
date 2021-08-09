@@ -523,6 +523,7 @@ const WebServerDispatch_t WebServerDispatch[] PROGMEM = {
   { "rs", HTTP_ANY, HandleRestoreConfiguration },
   { "rt", HTTP_ANY, HandleResetConfiguration },
   { "in", HTTP_ANY, HandleInformation },
+  { "bc", HTTP_ANY, ImATeapot },
 #endif  // Not FIRMWARE_MINIMAL
 };
 
@@ -2403,6 +2404,12 @@ void HandleInformation(void)
                        "<div id='i' name='i'></div>"));
   //   WSContentSend_P(PSTR("</fieldset>"));
   WSContentSpaceButton(BUTTON_MAIN);
+  WSContentStop();
+}
+
+void ImATeapot(void)
+{
+  WSSend(418, CT_PLAIN, F("I'm a teapot"));
   WSContentStop();
 }
 #endif  // Not FIRMWARE_MINIMAL
